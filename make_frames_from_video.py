@@ -31,9 +31,10 @@ def make_frames(input_dir, output_dir):
 def main():
     #Get all files into a array
     for seasons in os.listdir('./assets/video/'):
-        episode = os.listdir('./assets/video/'+ seasons)[0]
-        name = os.path.splitext(episode)[0]
-        input_dir = os.path.abspath('./assets/video/'+ seasons+ '/'+ episode)
-        output_dir = "./assets/frames/" + seasons + "/" + name
-        make_frames(input_dir, output_dir)
+        episodes = os.listdir('./assets/video/'+ seasons)
+        for episode in episodes:
+            name = os.path.splitext(episode)[0]
+            input_dir = os.path.abspath('./assets/video/'+ seasons+ '/'+ episode)
+            output_dir = "./assets/frames/" + seasons + "/" + name
+            make_frames(input_dir, output_dir)
 main()

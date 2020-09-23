@@ -1,0 +1,61 @@
+import os
+import json
+def save_to_json(status_data):
+    a_file_read = open("status.json", "r")
+    status_json = json.load(a_file_read)
+    status_json.update(status_data)
+    a_file_read.close()
+    a_file_write = open("status.json", "w")
+    
+    json.dump(status_json, a_file_write)
+    a_file_write.close()
+
+
+def add_season_to_json():
+    return 0
+def add_episode_to_json():
+    print("tiririca")
+    with open('./status.json') as f:
+        status_data = json.load(f)
+        status_data['Episode']+=1
+
+        episode_dir = os.listdir('./assets/frames/' + str(status_data['Season']))
+        for i,episode in enumerate(episode_dir):
+            episode_dir[i] = int(episode)
+        if(max(episode_dir)<status_data['Episode']):
+            #add_season_to_json()
+            save_to_json({'Episode': 1})
+        else:
+            save_to_json({'Episode': status_data['Episode']})
+        print(episode_dir)
+        
+def add_frame_to_json():
+    
+    with open('./status.json') as f:
+        status_data = json.load(f)
+        status_data['Frame']+=1
+        #if(status_data['Frame']>)
+        print(status_data)
+        frame_dir = os.listdir('./assets/frames/' + str(status_data['Season']) + '/' + str(status_data['Episode']))
+        #Get only the name of the file
+        for i,frame in enumerate(frame_dir):
+            frame_dir[i] = int(os.path.splitext(frame)[0])
+        if(max(frame_dir) < status_data['Frame']):
+            add_episode_to_json()
+            save_to_json({'Frame': 1})
+        else:
+            save_to_json({'Frame': status_data['Frame']})
+
+
+
+
+    return 0
+
+def main():
+    with open('./status.json') as f:
+        status_data = json.load(f)
+        relative_path = "./assets/frames/Season 0"+ str(status_data.get('Season')) + "/"+ str(status_data.get('Episode'))+ "/"+ str(status_data.get('Frame'))+".jpg"        
+    add_frame_to_json()
+    
+for x in range(0,50):
+    main()
