@@ -60,17 +60,3 @@ def add_frame_to_json():
             save_to_json({'Frame': 0})
         else:
             save_to_json({'Frame': status_data['Frame']})
-
-
-
-
-    return 0
-
-def main():
-    with open('./status.json') as f:
-        status_data = json.load(f)
-        relative_path = "./assets/frames/Season 0"+ str(status_data.get('Season')) + "/"+ str(status_data.get('Episode'))+ "/"+ str(status_data.get('Frame'))+".jpg"        
-    add_frame_to_json()
-    
-for x in range(0,300):
-    main()
